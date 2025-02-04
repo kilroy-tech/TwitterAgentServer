@@ -60,14 +60,14 @@ session for future use. Cookies are stored in the local ```./config``` directory
 
 The following ```curl``` commands illustrate how to use the various API endpoints:
 
-| Command | curl syntax | Description |
-| -------- | -------- | -------- |
-| getLatestTweet | ```curl http://localhost:3300/v1/getLatestTweet/Tastykake``` | Gets the most recent tweet as full JSON from Tastykake |
-| getTweets | ```curl http://localhost:3300/v1/getTweets/b05crypto/3``` |  Gets the last 3 tweets from b05crypto |
-| getTweetsAndReplies | ```curl http://localhost:3300/v1/getTweetsAndReplies/Tastykake/5/true``` | Gets 5 tweets and replies from Tastykake in simplified JSON format  |
-| fetchListTweets | ```curl http://localhost:3300/v1/fetchListTweets/1491981766466293761/1/true``` | Fetch first page of tweets from the list (Sonic) in simple JSON form  |
-| sendTweet | ```curl -XPOST -i -H "Content-type: text/plain" --data "Hello World!" http://localhost:3300/v1/sendTweet``` | POST request to send the text as a tweet |
-| info | ```curl http://localhost:3300/v1/info``` | Retrieves basic server info. Can be used for health checks.  |
+| Command | curl syntax |
+| -------- | -------- |
+| **getLatestTweet** - Gets the most recent tweet as full JSON from Tastykake| ```curl http://localhost:3300/v1/getLatestTweet/Tastykake``` |
+| **getTweets** - Gets the last 3 tweets from b05crypto | ```curl http://localhost:3300/v1/getTweets/b05crypto/3``` |
+| **getTweetsAndReplies** - Gets 5 tweets and replies from Tastykake in simplified JSON format | ```curl http://localhost:3300/v1/getTweetsAndReplies/Tastykake/5/true``` |
+| **fetchListTweets** - Fetch first page of tweets from the list (Sonic) in simple JSON form | ```curl http://localhost:3300/v1/fetchListTweets/1491981766466293761/1/true``` |
+| **sendTweet** - POST request to send the text as a tweet | ```curl -XPOST -i -H "Content-type: text/plain" --data "Hello World!" http://localhost:3300/v1/sendTweet``` |
+| **info** - Retrieves basic server info. Can be used for health checks.| ```curl http://localhost:3300/v1/info``` |
 
 ## Contributing
 While this application was designed initially to provide an easy interface between the Kilroy automation platform and Twitter, it's available for use by anyone needing a simple REST API for interacting with Twitter. If you have suggestions, issues, or enhancements, please contribute
