@@ -1,5 +1,5 @@
 # TwitterAgentServer
-Simple RESTful API for Kilroy to call for Twitter scraping services
+Simple RESTful API for apps to call for Twitter scraping services
 
 TwitterAgentServer is a straightforward express.js application that is designed as a friendly wrapper around the 
 [agent-twitter-client](https://github.com/elizaOS/agent-twitter-client) library. It presents simple REST API endpoints
