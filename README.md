@@ -17,13 +17,29 @@ interact with Twitter.
   * npm start
 
 ### Using Docker and Docker Compose
-  * instructions TBD (Docker version coming soon!)
-
+  * clone this repository
+  * at the project top level, build the docker image:
+    * ```docker build -t twitteragentserver .```
+    * or something fancier, like: ```docker buildx build --push --tag twitteragentserver --platform=linux/amd64,linux/arm/v7,linux/arm64/v8 .```
+  * run the local image (twitteragentserver) using a .env file in the local directory and a local ./config directory for caching:
+    * ```docker run --rm -it --name twitteragentserver -p 3300:3300 --env-file .env -v ./config:/project/config twitteragentserver```
+  * to use docker compose, edit the compose.yml file as needed, and supply environment vars for username and password, then use ```docker compose up``` to launch the stack
+  
 ### .env File Format and Environment Variables
   * ```TWITTER_USERNAME``` - set to your Twitter ID (not email, not real name)
   * ```TWITTER_PASSWORD``` - set to your Twitter account's password
   * ```HTTP_PORT``` - the TCP/IP port for the server to listen on. Defaults to 3300
   * ```DEBUG``` - optional, setting to ```'TwitterAgent:*'``` will enable debugging messages in the console
+
+Sample .env file contents:
+```
+TWITTER_USERNAME=Tastykake
+TWITTER_PASSWORD=strawberry_rhubarb
+HTTP_PORT=3300
+DEBUG='TwitterAgent:*'
+```
+
+**Note:** For normal operations, the DEBUG entry should be omitted to avoid unnecessary log file entries when running as a background task or Docker container.
 
 ### Using TwitterAgentServer
 Once the server is running, you can connect to it from any HTTP client. The server will attempt to use cookie data from its cache

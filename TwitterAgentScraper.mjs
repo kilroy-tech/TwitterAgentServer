@@ -67,6 +67,7 @@ async function _Init () {
             debug ("signing in with cookies");
             await scraper.setCookies (cookies);
             debug ("signed in");
+            console.log ("Signed in with cookies.");
         }
         else {
             debug (`WARNING! No cookies to set! Signing in with username/password (${credentials.username}/${credentials.password})!`);
@@ -74,6 +75,7 @@ async function _Init () {
                 credentials.username, 
                 credentials.password
             );
+            console.log ("Signed in with credentials.");
             debug ("Detecting cookies after login");
             const cookiesObj = await scraper.getCookies();
             //debug(`Got cookies:\n${JSON.stringify (cookiesObj, null, 4)}`);
@@ -82,12 +84,16 @@ async function _Init () {
                 let fd = fs.openSync (cookieFilePath,"w");
                 fs.writeSync(fd,JSON.stringify(cookiesObj,null,4));
                 debug ("written!");
+                console.log (`Cached cookies for future use at ./config/${credentials.username}_cookies.json`);
             }
             else {
                 debug ("ERROR!! no cookies were read.");
             }
         }
     
+        //The isLoggedIn() function seems to work only intermittently. We're going to pretend this
+        //always works and just return true, regardless. This will prevent multiple user/pass sign-in
+        //attempts which will ultimately lock your Twitter account if you have too many new sessions.
         loggedIn = await scraper.isLoggedIn ();
         debug (`Logged in status: ${loggedIn}`);
         return true; //return loggedIn;
@@ -119,8 +125,8 @@ export async function TwitterAgentScraper (command) {
     try {
         if (!loggedIn) {
             debug ("Scraper not logged in.... retrying once.");
-            let ok = await _Init ();
-            if (!ok) {
+            loggedIn = await _Init ();
+            if (!loggedIn) {
                 debug ("scraper isn't functional... request fails.");
                 return null;
             }

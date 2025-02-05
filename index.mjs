@@ -1,3 +1,6 @@
+// TwitterAgentServer, Copyright Kilroy BC, LLC
+// author: cshotton
+//
 //----- main express.js application that instantiates an API server and prepares for Twitter scraping
 
 import dotenv from 'dotenv';
